@@ -23,7 +23,7 @@ A sleek, automated Python script to launch the Rockstar Games Launcher and sign 
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/rockstar-auto-login.git
+    git clone https://github.com/JohnySir/Rockstar-Launcher-Auto-Login.git
     cd rockstar-auto-login
     ```
 
