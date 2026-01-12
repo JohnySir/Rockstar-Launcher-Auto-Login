@@ -2,9 +2,7 @@
 
 A sleek, automated Python script to launch the Rockstar Games Launcher and sign you in automatically. No more typing credentials every time!
 
-![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
-![Rich](https://img.shields.io/badge/Rich-CLI-cyan.svg)
-![PyAutoGUI](https://img.shields.io/badge/PyAutoGUI-Automation-green.svg)
+![Logo](https://i.ibb.co/hFXMKyYZ/Rockstar-Games-Social-Club-Logo-svg-1.png "Logo")
 
 ## ✨ Features
 
