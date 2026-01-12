@@ -2,8 +2,12 @@ name: Build Rockstar Login EXE
 
 on:
   push:
-    branches: [ "main", "master" ]
-  workflow_dispatch: # Allows manual trigger from Actions tab
+    tags:
+      - 'v*' # Triggers on tags like v1.0, v2.3.1
+  workflow_dispatch: # Allows manual trigger
+
+permissions:
+  contents: write # Required to create releases
 
 jobs:
   build:
@@ -24,14 +28,11 @@ jobs:
         pip install pyautogui rich pyinstaller
 
     - name: Build with PyInstaller
-      # --onefile: Bundles everything into a single .exe
-      # --noconsole: Optional, but removes the black terminal window (remove this flag if you want to see your 'rich' loading screen)
-      # We KEEP the console here because your script prints cool output!
       run: |
         pyinstaller --onefile --name "RockstarAutoLogin" rockstar_login.py
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      if: startsWith(github.ref, 'refs/tags/')
       with:
-        name: RockstarAutoLogin-EXE
-        path: dist/RockstarAutoLogin.exe
+        files: dist/RockstarAutoLogin.exe
