@@ -1,0 +1,37 @@
+name: Build Rockstar Login EXE
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch: # Allows manual trigger from Actions tab
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyautogui rich pyinstaller
+
+    - name: Build with PyInstaller
+      # --onefile: Bundles everything into a single .exe
+      # --noconsole: Optional, but removes the black terminal window (remove this flag if you want to see your 'rich' loading screen)
+      # We KEEP the console here because your script prints cool output!
+      run: |
+        pyinstaller --onefile --name "RockstarAutoLogin" rockstar_login.py
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: RockstarAutoLogin-EXE
+        path: dist/RockstarAutoLogin.exe
